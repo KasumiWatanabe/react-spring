@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   prism:
@@ -6,5 +6,5 @@ services:
     ports:
       - 9080:9080
     volumes:
-      - ../..:/todo-app
-    command: mock -p 9080 -h 0.0.0.0 /todo-app/backend/rest-api-specification/openapi.yaml
+      - ../..:/react-spring
+    command: mock -p 9080 -h 0.0.0.0 /react-spring/backend/rest-api-specification/openapi.yaml
