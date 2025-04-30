@@ -3,9 +3,9 @@ resource "aws_security_group" "ecs_sg" {
   vpc_id = aws_vpc.main_vpc.id
 
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -41,8 +41,55 @@ resource "aws_ecs_task_definition" "ecs_task" {
       essential = true
       portMappings = [
         {
-          containerPort = 80
-          hostPort      = 80
+          containerPort = 9080
+          hostPort      = 9080
+          protocol      = "tcp"
+        }
+      ]
+      environment = [
+        {
+          name  = "SPRING_DATASOURCE_URL"
+          value = "jdbc:postgresql://localhost:5432/mydatabase"
+        },
+        {
+          name  = "SPRING_DATASOURCE_USERNAME"
+          value = "myuser"
+        },
+        {
+          name  = "SPRING_DATASOURCE_PASSWORD"
+          value = "mypassword"
+        }
+      ]
+      dependsOn = [
+        {
+          containerName = "postgres"
+          condition     = "START"
+        }
+      ]
+    },
+    {
+      name      = "postgres"
+      image     = "postgres:12"
+      essential = false
+      portMappings = [
+        {
+          containerPort = 5432
+          hostPort      = 5432
+          protocol      = "tcp"
+        }
+      ]
+      environment = [
+        {
+          name  = "POSTGRES_DB"
+          value = "mydatabase"
+        },
+        {
+          name  = "POSTGRES_USER"
+          value = "myuser"
+        },
+        {
+          name  = "POSTGRES_PASSWORD"
+          value = "mypassword"
         }
       ]
     }
