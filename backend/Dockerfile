@@ -1,5 +1,5 @@
 # ベースイメージとしてOpenJDK 21を指定
-FROM openjdk:21-jdk-alpine
+FROM openjdk:21-jdk
 
 # 作業ディレクトリとして/tmpを指定
 VOLUME /tmp
