@@ -9,4 +9,5 @@ resource "aws_ecr_repository" "foo" {
   tags = {
     "IaC" = "terraform"
   }
+
 }
