@@ -1,5 +1,8 @@
 package com.example.todo.dto;
 
+import lombok.Getter;
+
+@Getter
 public class TodoResponse {
     private Long id;
     private String text;
@@ -13,15 +16,15 @@ public class TodoResponse {
         this.completed = completed;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public Boolean getCompleted() {
-        return completed;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public String getText() {
+//        return text;
+//    }
+//
+//    public Boolean getCompleted() {
+//        return completed;
+//    }
 }
